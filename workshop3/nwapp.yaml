@@ -61,3 +61,20 @@ spec:
   ports:
   - port: 80
     targetPort: nwapp-port
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nwapp-ing
+  labels:
+    app: northwind
+spec:
+  rules: 
+  - host: nwapp.167.172.6.251.nip.io
+    http: 
+      paths:
+      - path: /
+        backend: 
+          serviceName: nwapp-svc
+          servicePort: 80
