@@ -31,6 +31,12 @@ spec:
       - name: nwapp-container
         image: tanchunwei/nwapp:v1
         imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 200m
+            memory: 16Mi
+          limits:
+            memory: 32Mi
         env:
         - name: DB_PASSWORD
           valueFrom: 
@@ -78,3 +84,31 @@ spec:
         backend: 
           serviceName: nwapp-svc
           servicePort: 3000
+
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nwapp-hpa
+  labels:
+    app: northwind
+spec:
+  minReplicas: 1
+  maxReplicas: 4
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nwapp-deploy
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 15
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
