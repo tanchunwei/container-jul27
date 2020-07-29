@@ -71,7 +71,7 @@ metadata:
     app: northwind
 spec:
   rules: 
-  - host: nwapp.167.172.6.251.nip.io
+  - host: nwapp.167.172.6.228.nip.io
     http: 
       paths:
       - path: /
