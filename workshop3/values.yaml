@@ -5,6 +5,6 @@ controller:
 defaultBackend:
   enabled: true
   image:
-    repository: chukmunnlee/ingress_default_backend
-    tag: v1
+    repository: chukmunnlee/ingress_default_backend #repository: nginx/nginx-ingress
+    tag: v1 #tag: latest
   port: 3000
