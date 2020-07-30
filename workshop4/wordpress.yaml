@@ -99,6 +99,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/limit-rps: "5"
 spec:
+  ingressClassName: nginx
   rules: 
   - host: acme.167.172.6.251.nip.io
     http: 
